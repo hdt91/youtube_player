@@ -38,3 +38,7 @@ config :ueberauth, Ueberauth.Strategy.Google.OAuth,
   client_id: System.get_env("GOOGLE_CLIENT_ID"),
   client_secret: System.get_env("GOOGLE_CLIENT_SECRET"),
   redirect_uri: System.get_env("GOOGLE_REDIRECT_URI")
+
+config :youtube_player, YoutubePlayer.Database,
+  host: System.get_env("RETHINKDB_HOST"),
+  port: elem(Integer.parse(System.get_env("RETHINKDB_PORT")), 0)
