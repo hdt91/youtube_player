@@ -1,0 +1,10 @@
+#!/bin/bash
+
+set -e
+
+IMAGE_NAME=youtube_player
+IMAGE_TAG=latest
+NETWORK_NAME=youtube_player
+
+docker network create $NETWORK_NAME
+docker run --network youtube_player --rm -p 4000:4000 -it -v "$(pwd):/opt/dev" $IMAGE_NAME:$IMAGE_TAG bash

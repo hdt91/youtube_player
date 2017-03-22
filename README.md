@@ -18,3 +18,9 @@ Ready to run in production? Please [check our deployment guides](http://www.phoe
   * Docs: http://hexdocs.pm/phoenix
   * Mailing list: http://groups.google.com/group/phoenix-talk
   * Source: https://github.com/phoenixframework/phoenix
+
+
+# Dev steps
+- Run `./scriptt/run_all_containers` to setup the basic container environment.
+- Run './script/run_dev_container' to run the dev container (cur directory is mounted to /opt/dev). Require a running `postgres` container
+- Forward port 4000 using SSH if needed

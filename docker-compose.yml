@@ -1,0 +1,13 @@
+version: '2'
+services:
+  postgres:
+    image: postgres:9.6
+  app:
+    image: youtube_player
+    build: .
+    volumes:
+      - .:/opt/dev
+    ports:
+      - "4000:4000"
+    depends_on:
+      - postgres
