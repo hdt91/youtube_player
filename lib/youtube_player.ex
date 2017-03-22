@@ -10,12 +10,9 @@ defmodule YoutubePlayer do
       # Start the endpoint when the application starts
       supervisor(YoutubePlayer.Endpoint, []),
       # Start the Ecto repository
-      supervisor(YoutubePlayer.Repo, []),
+      supervisor(YoutubePlayer.Repo, [])
       # Here you could define other workers and supervisors as children
       # worker(YoutubePlayer.Worker, [arg1, arg2, arg3]),
-      worker(YoutubePlayer.Database,
-       [[host: Application.get_env(:youtube_player, YoutubePlayer.Database)[:host],
-         port: Application.get_env(:youtube_player, YoutubePlayer.Database)[:port]]])
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html
@@ -32,7 +29,6 @@ defmodule YoutubePlayer do
   end
 end
 
-defmodule YoutubePlayer.Database do
-  use RethinkDB.Connection
-end
-
+# defmodule YoutubePlayer.Database do
+#   use RethinkDB.Connection
+# end

@@ -4,13 +4,13 @@ defmodule YoutubePlayer.Mixfile do
   def project do
     [app: :youtube_player,
      version: "0.0.1",
-     elixir: "~> 1.0",
+     elixir: "~> 1.4.0",
      elixirc_paths: elixirc_paths(Mix.env),
      compilers: [:phoenix, :gettext] ++ Mix.compilers,
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
-     aliases: aliases,
-     deps: deps]
+     aliases: aliases(),
+     deps: deps()]
   end
 
   # Configuration for the OTP application.
@@ -32,16 +32,16 @@ defmodule YoutubePlayer.Mixfile do
   #
   # Type `mix help deps` for examples and options.
   defp deps do
-    [{:phoenix, "~> 1.1.4"},
+    [{:phoenix, "~> 1.2.1"},
      {:postgrex, ">= 0.0.0"},
-     {:phoenix_ecto, "~> 2.0"},
-     {:phoenix_html, "~> 2.4"},
-     {:phoenix_live_reload, "~> 1.0", only: :dev},
-     {:gettext, "~> 0.9"},
-     {:cowboy, "~> 1.0"},
-     {:ueberauth, "~> 0.2"},
-     {:ueberauth_google, "~> 0.2"},
-     {:rethinkdb, "~> 0.4"}
+     {:phoenix_pubsub, "~> 1.0"},
+     {:phoenix_ecto, "~> 3.2.1"},
+     {:phoenix_html, "~> 2.9.2"},
+     {:phoenix_live_reload, "~> 1.0.6", only: :dev},
+     {:gettext, "~> 0.12.1"},
+     {:cowboy, "~> 1.0.4"},
+     {:ueberauth, "~> 0.4.0"},
+     {:ueberauth_google, "~> 0.4.0"},
     ]
   end
 
