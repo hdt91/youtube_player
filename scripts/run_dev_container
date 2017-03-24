@@ -1,7 +1,5 @@
 #!/bin/bash
 
-set -e
-
 IMAGE_NAME=youtube_player
 IMAGE_TAG=latest
 NETWORK_NAME=youtube_player

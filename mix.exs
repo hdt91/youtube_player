@@ -41,7 +41,7 @@ defmodule YoutubePlayer.Mixfile do
      {:gettext, "~> 0.12.1"},
      {:cowboy, "~> 1.0.4"},
      {:ueberauth, "~> 0.4.0"},
-     {:ueberauth_google, "~> 0.4.0"},
+     {:ueberauth_google, "~> 0.5"},
     ]
   end
 

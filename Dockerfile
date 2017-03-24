@@ -11,7 +11,8 @@ RUN dpkg-reconfigure --frontend=noninteractive locales
 
 RUN wget https://packages.erlang-solutions.com/erlang-solutions_1.0_all.deb && dpkg -i erlang-solutions_1.0_all.deb
 RUN apt-get update && apt-get install -y esl-erlang elixir && apt-get clean
-#RUN echo Y | mix archive.install https://github.com/phoenixframework/archives/raw/master/phoenix_new.ez
+RUN mix local.hex
+RUN mix archive.install https://github.com/phoenixframework/archives/raw/master/phoenix_new.ez
 
 # Nodejs & inotify tool for file watching
 RUN curl -sL https://deb.nodesource.com/setup_6.x | bash -
