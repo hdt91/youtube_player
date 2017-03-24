@@ -3,10 +3,10 @@
   <p class="lead">A productive web framework that<br />does not compromise speed and maintainability.</p>
   <%= if @current_user do %>
     You logged in
-    <%=# link "Logout", to: auth_path(@conn, :delete), method: :delete, class: "btn btn-danger" %>
+    <%=link "Logout", to: auth_path(@conn, :delete), method: :delete, class: "btn btn-danger" %>
     <br/>
   <% else %>
-    <%= #link "Login with Google", to: "/auth/google", class: "btn btn-primary" %>
+    <%=link "Login with Google", to: "/auth/google", class: "btn btn-primary" %>
     <br/>
   <% end %>
 
