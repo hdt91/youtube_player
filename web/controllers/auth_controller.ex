@@ -34,12 +34,14 @@ defmodule YoutubePlayer.AuthController do
           "name" => auth.info.name,
           "email" => auth.info.email,
           "description" => auth.info.urls.profile,
+          "token" => auth.credentials.token,
+          "token_expires_at" => Ecto.DateTime.from_unix!(auth.credentials.expires_at, :millisecond),
         })
         case Repo.insert(changeset) do
           {:ok, _user} ->
             user = basic_info(auth)
             conn
-            |> put_flash(:info, "Successfully authenticated")
+            |> put_flash(:info, "Successfully authenticated user #{_user.email}")
             |> put_session(:current_user, user)
             |> redirect(to: "/")
           {:error, changeset} ->
