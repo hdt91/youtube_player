@@ -23,10 +23,10 @@ defmodule YoutubePlayer.AuthController do
 
   def callback(%{assigns: %{ueberauth_auth: auth}} = conn, _params) do
     case Repo.get_by(User, name: auth.info.name) do
-      {:ok, _user} ->
+      %{email: email} ->
         user = basic_info(auth)
         conn
-        |> put_flash(:info, "Successfully authenticated")
+        |> put_flash(:info, "Successfully authenticated user #{email}")
         |> put_session(:current_user, user)
         |> redirect(to: "/")
       nil ->
