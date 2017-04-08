@@ -11,6 +11,8 @@ defmodule YoutubePlayer.AuthController do
   alias Ueberauth.Strategy.Helpers
   alias YoutubePlayer.User
 
+  plug :authenticate when action in [:callback]
+
   def request(conn, _params) do
     render(conn, "request.html", callback_url: Helpers.callback_url(conn))
   end
@@ -21,7 +23,18 @@ defmodule YoutubePlayer.AuthController do
     |> redirect(to: "/")
   end
 
-  def callback(%{assigns: %{ueberauth_auth: auth}} = conn, _params) do
+  def callback(conn, _params) do
+    conn
+  end
+
+  def delete(conn, _params) do
+    conn
+    |> put_flash(:info, "You have been logged out!")
+    |> configure_session(drop: true)
+    |> redirect(to: "/")
+  end
+
+  def authenticate(%{assigns: %{ueberauth_auth: auth}} = conn, _params) do
     case Repo.get_by(User, name: auth.info.name) do
       %{email: email} ->
         user = basic_info(auth)
@@ -38,10 +51,10 @@ defmodule YoutubePlayer.AuthController do
           "token_expires_at" => Ecto.DateTime.from_unix!(auth.credentials.expires_at, :millisecond),
         })
         case Repo.insert(changeset) do
-          {:ok, _user} ->
+          {:ok, user_obj} ->
             user = basic_info(auth)
             conn
-            |> put_flash(:info, "Successfully authenticated user #{_user.email}")
+            |> put_flash(:info, "Successfully authenticated user #{user_obj.email}")
             |> put_session(:current_user, user)
             |> redirect(to: "/")
           {:error, changeset} ->
@@ -50,13 +63,6 @@ defmodule YoutubePlayer.AuthController do
             |> redirect(to: "/")
         end
     end
-  end
-
-  def delete(conn, _params) do
-    conn
-    |> put_flash(:info, "You have been logged out!")
-    |> configure_session(drop: true)
-    |> redirect(to: "/")
   end
 
   defp basic_info(auth) do

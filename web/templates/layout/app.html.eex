@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Hello YoutubePlayer!</title>
+    <title>YoutubePlayer!</title>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
   </head>
 
@@ -16,7 +16,13 @@
       <header class="header">
         <nav role="navigation">
           <ul class="nav nav-pills pull-right">
-            <li><a href="http://www.phoenixframework.org/docs">Get Started</a></li>
+            <%= if @current_user do %>
+              <li>
+                <%=link "Logout", to: auth_path(@conn, :delete), method: :delete, class: "btn btn-danger" %>
+              </li>
+            <% else %>
+              <li><%=link "Login with Google", to: "/auth/google", class: "btn btn-primary" %></li>
+            <% end %>
           </ul>
         </nav>
         <span class="logo"></span>

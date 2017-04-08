@@ -14,12 +14,16 @@ defmodule YoutubePlayer.Router do
     plug :put_secure_browser_headers
   end
 
+  pipeline :auth do
+    plug YoutubePlayer.CurrentUser
+  end
+
   pipeline :api do
     plug :accepts, ["json"]
   end
 
   scope "/", YoutubePlayer do
-    pipe_through :browser # Use the default browser stack
+    pipe_through [:browser, :auth]
 
     get "/", PageController, :index
     resources "/users", UserController
