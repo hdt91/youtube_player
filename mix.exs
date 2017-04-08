@@ -20,8 +20,7 @@ defmodule YoutubePlayer.Mixfile do
     [mod: {YoutubePlayer, []},
      applications: [:phoenix, :phoenix_html, :cowboy, :logger, :gettext,
                     :phoenix_ecto, :postgrex,
-                    :ueberauth,
-                    :ueberauth_google]]
+                    :ueberauth, :ueberauth_google, :httpoison]]
   end
 
   # Specifies which paths to compile per environment.
@@ -42,6 +41,7 @@ defmodule YoutubePlayer.Mixfile do
      {:cowboy, "~> 1.0.4"},
      {:ueberauth, "~> 0.4.0"},
      {:ueberauth_google, "~> 0.5"},
+     {:httpoison, "~> 0.11.1"}
     ]
   end
 
